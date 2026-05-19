@@ -55,6 +55,22 @@ export const skills = {
 
 export const experiences = [
   {
+    id: 4,
+    company: "TikTok",
+    position: "Software Engineering Intern",
+    location: "San Jose, California, US",
+    startDate: "2025-06",
+    endDate: "2025-08",
+    companyUrl: "https://www.tiktok.com",
+    companyLogo: "/tiktok_logo.svg",
+    highlights: [
+      "Redesigned the attribution storage system in the TikTok Ads SIA data pipeline using Go, splitting a monolithic 980TiB Abase (Redis) instance of touchpoint data into consistent-hashed shards with merge-on-read to support scalable touchpoint storage",
+      "Designed and implemented a zero-downtime database instance migration mechanism by maintaining dual consistent hash rings; used dual-read, dual-write approach with rollback mechanism to enable elastic scaling and balanced load distribution",
+      "Validated data consistency via integration tests and experiments to test storage services and logging downstream fields; confirmed <1% diff in pre-production environment; further verified business correctness with A/B testing before rolling out to production traffic"
+    ],
+    technologies: ["Go", "Redis", "Consistent Hashing", "Distributed Systems", "A/B Testing", "Data Pipelines"]
+  },
+  {
     id: 1,
     company: "Green Qubit Inc.",
     position: "Software Engineering Intern",
