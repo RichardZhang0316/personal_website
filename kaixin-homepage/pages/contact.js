@@ -1,89 +1,115 @@
-import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import { personal } from "../data/experience";
 import Navbar from "../components/navigation_bar";
 import Head from 'next/head';
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
+const contactItems = (personal) => [
+  {
+    label: 'Email',
+    value: personal.email,
+    href: `mailto:${personal.email}`,
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Phone',
+    value: personal.phone,
+    href: `tel:${personal.phone}`,
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'GitHub',
+    value: 'RichardZhang0316',
+    href: personal.github,
+    external: true,
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+      </svg>
+    ),
+  },
+  {
+    label: 'LinkedIn',
+    value: 'richardzhangkaixin',
+    href: personal.linkedin,
+    external: true,
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+      </svg>
+    ),
+  },
+];
 
-export default function ExperiencePage() {
-    return (
-        <div className={`${geistSans.className} ${geistMono.className} min-h-screen`}>
-            <Navbar />
+export default function Contact() {
+  const items = contactItems(personal);
+  return (
+    <div className={`${geistSans.className} page-bg`}>
+      <Head>
+        <title>Contact – Kaixin Zhang</title>
+      </Head>
+      <Navbar />
 
-            <main>
-                {/* Header */}
-                <div className="bg-gray-50 dark:bg-gray-800 py-12">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-4xl font-bold text-center">Contact</h1>
-                    </div>
-                </div>
-
-                {/* Contact Section */}
-                <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 max-w-6xl mx-auto bg-gray-50 dark:bg-gray-800">
-                    <h2 className="text-3xl font-bold mb-8">Get In Touch</h2>
-                    <div className="flex flex-col sm:flex-row gap-8 justify-between">
-                        <div>
-                            <p className="text-lg mb-4">
-                                Feel free to reach out for opportunities!
-                            </p>
-                            <ul className="space-y-2">
-                                <li className="flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                                    </svg>
-                                    <a href={`mailto:${personal.email}`} className="hover:underline">
-                                        {personal.email}
-                                    </a>
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                    </svg>
-                                    <a href={`tel:${personal.phone}`} className="hover:underline">
-                                        {personal.phone}
-                                    </a>
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" />
-                                    </svg>
-                                    <a href={personal.github} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                                        GitHub
-                                    </a>
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fillRule="evenodd" d="M16.338 16.338H13.67V12.16c0-1.005-.02-2.298-1.39-2.298-1.397 0-1.61 1.09-1.61 2.23v4.246h-2.667V8.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.21 1.778 3.21 4.092v3.713zM7 8.75H4.333V16.338H7V8.75zM5.667 4.5a1.54 1.54 0 11-3.08 0 1.54 1.54 0 013.08 0z" />
-                                    </svg>
-                                    <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                                        LinkedIn
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="sm:text-right">
-                            <p className="text-lg font-medium mb-2">Current Location</p>
-                            <p>Philadelphia, PA, US</p>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            {/* Footer */}
-            <footer className="py-8 px-4 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
-                <p>© {new Date().getFullYear()} Kaixin Zhang. All rights reserved.</p>
-                <p className="mt-2">Built with Next.js</p>
-            </footer>
+      <main>
+        <div className="page-header">
+          <div className="max-w-6xl mx-auto">
+            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>Contact</h1>
+          </div>
         </div>
-    );
+
+        <section className="max-w-2xl mx-auto px-4 sm:px-6 py-16">
+          <p className="text-lg mb-10 text-center" style={{ color: 'var(--muted)' }}>
+            Feel free to reach out — I&apos;m always open to new opportunities and conversations.
+          </p>
+
+          <div className="space-y-3">
+            {items.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+                className="card-hover flex items-center gap-4 p-4"
+              >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(59,130,246,0.1)', color: 'var(--accent-lt)' }}>
+                  {item.icon}
+                </div>
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--muted)' }}>
+                    {item.label}
+                  </p>
+                  <p className="font-medium mt-0.5" style={{ color: 'var(--text)' }}>{item.value}</p>
+                </div>
+                <svg className="w-4 h-4 ml-auto flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  style={{ color: 'var(--muted)' }}>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            ))}
+          </div>
+
+          <div className="card p-6 mt-10 text-center">
+            <p className="text-sm" style={{ color: 'var(--muted)' }}>
+              Based in <span style={{ color: 'var(--text)' }}>Philadelphia, PA</span> · Open to remote and hybrid roles
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer">
+        <p>© {new Date().getFullYear()} {personal.name}. All rights reserved.</p>
+      </footer>
+    </div>
+  );
 }

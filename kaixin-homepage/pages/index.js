@@ -1,137 +1,100 @@
 import Image from "next/image";
 import Navbar from "../components/navigation_bar";
 import { Geist, Geist_Mono } from "next/font/google";
-import { personal, education, courses, skills, experiences, projects } from "../data/experience";
+import { personal, education, skills, projects } from "../data/experience";
 import Link from "next/link";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export default function Home() {
-
-  const featuredProjects = projects.filter(project => project.featured);
+  const featuredProjects = projects.filter(p => p.featured).slice(0, 2);
 
   return (
-    <div className={`${geistSans.className} ${geistMono.className} min-h-screen`}>
+    <div className={`${geistSans.className} page-bg`}>
       <Navbar />
 
-      {/* Summary Section */}
-      <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="md:w-2/3">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-              {personal.name}
-            </h1>
+      {/* ── Hero ── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-24">
+        <div className="flex flex-col md:flex-row items-center gap-14">
 
+          {/* Text */}
+          <div className="md:w-3/5 space-y-5">
+            <div className="fade-up">
+              <div className="status-pill mb-4">
+                <span className="status-dot" />
+                Joining TikTok · Ads Measurement · Signal Privacy Infra
+              </div>
+              <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight" style={{ color: 'var(--text)' }}>
+                {personal.name}
+              </h1>
+            </div>
 
-            <p className="mt-4 text-xl text-gray-600 dark:text-gray-300">
+            <p className="fade-up-1 text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>
               {personal.summary}
             </p>
-            <p className="mt-4 text-lg font-medium">
-              {personal.objective}
-            </p>
 
-            {/* <div className="grid gap-4 sm:grid-cols-2">
-            {education.map((edu, index) => (
-              <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                <h3 className="text-lg font-semibold">{edu.institution}</h3>
-                <p className="text-base text-gray-600 dark:text-gray-300">{edu.degree} in {edu.major}</p>
-                <p className="text-sm text-gray-500">{edu.startDate.split('-')[0]} - {edu.endDate.split('-')[0]}</p>
-              </div>
-            ))}
-          </div> */}
-
-            <div className="flex gap-4 mt-6">
-              <a
-                href={`mailto:${personal.email}`}
-                className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black rounded-md hover:opacity-90 transition font-medium"
-              >
-                Email
+            <div className="fade-up-2 flex flex-wrap gap-3 pt-2">
+              <a href={`mailto:${personal.email}`} className="btn-primary px-5 py-2.5 text-sm">
+                Email Me
               </a>
-              <a
-                href={personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 border border-black dark:border-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition font-medium"
-              >
+              <a href={personal.github} target="_blank" rel="noopener noreferrer"
+                className="btn-ghost px-5 py-2.5 text-sm">
                 GitHub
               </a>
-              <a
-                href={personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 px-4 py-2 bg-blue-600 text-white border border-blue-600 rounded-md hover:bg-blue-700 transition font-medium"
-              >
-                LinkedIn</a>
-              <a
-                href={personal.medium}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-black text-white border border-black rounded-md hover:bg-gray-800 transition font-medium"
-              >
-                Medium</a>
+              <a href={personal.linkedin} target="_blank" rel="noopener noreferrer"
+                className="btn-ghost px-5 py-2.5 text-sm">
+                LinkedIn
+              </a>
+              <a href={personal.medium} target="_blank" rel="noopener noreferrer"
+                className="btn-ghost px-5 py-2.5 text-sm">
+                Medium
+              </a>
             </div>
           </div>
-          <div className="md:w-1/3 flex justify-center">
-            {/* {personal.profile_photo} */}
-            <div className="w-48 h-48 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-              {/* {personal.profile_photo} */}
-              <Image
-                src="/profile_photo.jpeg"
-                alt={personal.name}
-                width={192}
-                height={192}
-                className="object-cover w-full h-full"
-                priority
-              />
+
+          {/* Avatar */}
+          <div className="md:w-2/5 flex justify-center fade-up-3">
+            <div className="avatar-ring">
+              <div className="w-52 h-52 rounded-2xl overflow-hidden" style={{ background: 'var(--bg-card)' }}>
+                <Image
+                  src="/profile_photo.jpeg"
+                  alt={personal.name}
+                  width={208} height={208}
+                  className="object-cover w-full h-full"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Education Section */}
-      <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 max-w-6xl mx-auto bg-gray-50 dark:bg-gray-800">
-        <h2 className="text-3xl font-bold mb-8">Education</h2>
-        <div className="space-y-8">
+      <div className="divider" />
+
+      {/* ── Education ── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-16">
+        <h2 className="section-heading">Education</h2>
+        <div className="space-y-4">
           {education.map((edu) => (
-            <div key={edu.id} className="flex items-start gap-6 border-l-4 border-black dark:border-white pl-4 py-2">
-              {/* add university logo */}
-              <div className="w-30 h-30 flex-shrink-0 bg-white dark:bg-gray-700 rounded-lg shadow-sm overflow-hidden flex items-center justify-center p-2">
+            <div key={edu.id} className="card p-5 flex items-center gap-5">
+              <div className="w-14 h-14 flex-shrink-0 rounded-lg overflow-hidden flex items-center justify-center p-1.5"
+                style={{ background: 'rgba(255,255,255,0.06)' }}>
                 {edu.logo ? (
-                  <Image
-                    src={edu.logo}
-                    alt={`${edu.institution} logo`}
-                    width={64}
-                    height={64}
-                    className="object-contain w-full h-full"
-                  />
+                  <Image src={edu.logo} alt={`${edu.institution} logo`}
+                    width={48} height={48} className="object-contain w-full h-full" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-xl font-bold">
-                    {edu.institution.charAt(0)}
-                  </div>
+                  <span className="text-lg font-bold text-accent">{edu.institution.charAt(0)}</span>
                 )}
               </div>
-
-              {/* education information */}
-              <div>
-                <h3 className="text-xl font-semibold">{edu.institution}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{edu.degree} in {edu.major}</p>
-                <p className="text-gray-500 dark:text-gray-400">
-                  {edu.startDate.split('-')[0]} - {edu.endDate.split('-')[0]}
-                </p>
-                <p className="text-gray-500 dark:text-gray-400">{edu.location}</p>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap justify-between gap-2">
+                  <h3 className="font-semibold text-lg" style={{ color: 'var(--text)' }}>{edu.institution}</h3>
+                  <span className="tag-neutral">{edu.startDate.split('-')[0]} – {edu.endDate.split('-')[0]}</span>
+                </div>
+                <p style={{ color: 'var(--muted)' }} className="text-sm mt-0.5">{edu.degree} in {edu.major} · {edu.location}</p>
                 {edu.achievements.length > 0 && (
-                  <div className="mt-2">
-                    <span className="font-medium">Achievements: </span>
-                    {edu.achievements.join(', ')}
-                  </div>
+                  <p className="text-sm mt-1.5" style={{ color: 'var(--muted)' }}>{edu.achievements.join(' · ')}</p>
                 )}
               </div>
             </div>
@@ -139,123 +102,80 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8">Skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Languages</h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.languages.map((lang, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm"
-                >
-                  {lang}
-                </span>
-              ))}
+      <div className="divider" />
+
+      {/* ── Skills ── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-16">
+        <h2 className="section-heading">Skills</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { label: 'Languages', items: skills.languages },
+            { label: 'Frameworks', items: skills.frameworks },
+            { label: 'Tools & Cloud', items: skills.tools },
+          ].map(({ label, items }) => (
+            <div key={label} className="card p-5">
+              <h3 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--muted)' }}>
+                {label}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {items.map((item, i) => (
+                  <span key={i} className="tag">{item}</span>
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Frameworks</h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.frameworks.map((framework, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm"
-                >
-                  {framework}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Tools</h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.tools.map((tool, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm"
-                >
-                  {tool}
-                </span>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Featured Projects Section */}
-      <section className="py-16 px-4 sm:px-6 md:px-8 lg:px-16 max-w-6xl mx-auto bg-gray-50 dark:bg-gray-800">
+      <div className="divider" />
+
+      {/* ── Featured Projects ── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-16">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">Featured Projects</h2>
-          <Link
-            href="/projects"
-            className="px-4 py-2 border border-black dark:border-white rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition font-medium"
-          >
-            View All Projects →
-          </Link>
+          <h2 className="section-heading" style={{ marginBottom: 0 }}>Featured Projects</h2>
+          <Link href="/projects" className="btn-ghost px-4 py-2 text-sm">View All →</Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {featuredProjects.slice(0, 2).map((project) => (
-            <div
-              key={project.id}
-              className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition"
-            >
-              <div className="h-48 bg-gray-100 dark:bg-gray-800 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          {featuredProjects.map((project) => (
+            <div key={project.id} className="card-hover overflow-hidden">
+              <div className="h-44 relative" style={{ background: 'var(--bg)' }}>
                 {project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={600}
-                    height={300}
-                    className="object-cover w-full h-full"
-                  />
+                  <Image src={project.image} alt={project.title}
+                    width={600} height={300} className="object-cover w-full h-full" />
                 ) : (
                   <div className="flex items-center justify-center h-full">
-                    <span className="text-gray-400 dark:text-gray-500">No image</span>
+                    <span style={{ color: 'var(--muted)' }}>No image</span>
                   </div>
                 )}
               </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-semibold">{project.title}</h3>
-                  <span className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
-                    {project.period}
-                  </span>
+              <div className="p-5">
+                <div className="flex justify-between items-start gap-2 mb-1">
+                  <h3 className="font-semibold text-lg" style={{ color: 'var(--text)' }}>{project.title}</h3>
+                  <span className="tag-neutral flex-shrink-0">{project.period}</span>
                 </div>
-                <p className="text-gray-500 dark:text-gray-400 mb-2">{project.subtitle}</p>
-                <p className="mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.slice(0, 3).map((tech, idx) => (
-                    <span key={idx} className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs rounded">
-                      {tech}
-                    </span>
+                <p className="text-sm mb-2" style={{ color: 'var(--accent-lt)' }}>{project.subtitle}</p>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>{project.description}</p>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {project.technologies.slice(0, 4).map((tech, idx) => (
+                    <span key={idx} className="tag-neutral">{tech}</span>
                   ))}
-                  {project.technologies.length > 3 && (
-                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-xs rounded">
-                      +{project.technologies.length - 3} more
-                    </span>
+                  {project.technologies.length > 4 && (
+                    <span className="tag-neutral">+{project.technologies.length - 4}</span>
                   )}
                 </div>
-                <Link
-                  href={`/projects#project-${project.id}`}
-                  className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
-                >
-                  Read more →
+                <Link href={`/projects#project-${project.id}`} className="text-sm font-medium" style={{ color: 'var(--accent-lt)' }}>
+                  View details →
                 </Link>
               </div>
             </div>
           ))}
         </div>
-
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
+      <footer className="footer">
         <p>© {new Date().getFullYear()} {personal.name}. All rights reserved.</p>
-        <p className="mt-2">Built with Next.js and Tailwind CSS</p>
+        <p className="mt-1" style={{ color: '#475569' }}>Built with Next.js · Tailwind CSS</p>
       </footer>
     </div>
   );
