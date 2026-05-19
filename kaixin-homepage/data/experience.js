@@ -6,7 +6,7 @@ export const personal = {
   github: "https://github.com/RichardZhang0316",
   medium: "https://medium.com/@richardzhangkaixin0316",
   summary: "Software engineer with strong programming, analytical, and communication skills. Experienced in system programming, full-stack, distributed system, agile development, fintech, machine learning, and mobile development with Java, C/C++, and Python",
-  objective: "Seeking a software engineering new grad position after May 2026"
+  objective: "Incoming Software Engineer @ TikTok · Ads Measurement Signal Privacy Infrastructure"
 };
 
 export const education = [
@@ -186,4 +186,48 @@ export const categories = [
   { id: "mobile-development", name: "Mobile Development" },
   { id: "networking", name: "Networking" },
   { id: "machine-learning", name: "Machine Learning" }
+];
+
+export const blogPosts = [
+  {
+    id: 1,
+    title: "Building a Fault-Tolerant Distributed Key-Value Store in C++",
+    excerpt: "A deep dive into primary-backup replication, checkpointing, and log-based recovery — lessons learned from building Penn Cloud from scratch.",
+    date: "2025-04-15",
+    readTime: "8 min read",
+    tags: ["Distributed Systems", "C++", "Systems"],
+    mediumUrl: "https://medium.com/@richardzhangkaixin0316",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "Chord DHT: From Theory to a Working Search Engine",
+    excerpt: "How I implemented consistent hashing, finger tables, and an inverted index on top of a 32-bit SHA Chord ring to build a keyword search engine.",
+    date: "2025-03-10",
+    readTime: "6 min read",
+    tags: ["Networking", "Distributed Systems", "Algorithms"],
+    mediumUrl: "https://medium.com/@richardzhangkaixin0316",
+    featured: false
+  },
+  {
+    id: 3,
+    title: "Optimizing Crypto Arbitrage Latency with Ray",
+    excerpt: "From 120s to 60s: how asynchronous task scheduling and distributed computing with Ray helped cut execution latency in a cash-and-carry arbitrage system.",
+    date: "2023-09-01",
+    readTime: "5 min read",
+    tags: ["Python", "Distributed Computing", "Fintech"],
+    mediumUrl: "https://medium.com/@richardzhangkaixin0316",
+    featured: false
+  }
+];
+
+export const blogTags = [
+  "Distributed Systems",
+  "C++",
+  "Systems",
+  "Networking",
+  "Algorithms",
+  "Python",
+  "Distributed Computing",
+  "Fintech"
 ];
