@@ -4,6 +4,7 @@ export const personal = {
   phone: "743-649-1607",
   linkedin: "https://www.linkedin.com/in/richardzhangkaixin/",
   github: "https://github.com/RichardZhang0316",
+  medium: "https://medium.com/@richardzhangkaixin0316",
   summary: "Software engineer with strong programming, analytical, and communication skills. Experienced in system programming, full-stack, distributed system, agile development, fintech, machine learning, and mobile development with Java, C/C++, and Python",
   objective: "Seeking a software engineering new grad position after May 2026"
 };

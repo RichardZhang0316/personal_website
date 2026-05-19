@@ -24,12 +24,9 @@ export default function Navbar() {
             <Link href="/blog" className="px-3 py-2 text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300">
               Blog
             </Link>
-            <a 
-              href="mailto:richardzhangkaixin0316@gmail.com" 
-              className="px-3 py-2 text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300"
-            >
+            <Link href="/contact" className="px-3 py-2 text-sm font-medium hover:text-gray-600 dark:hover:text-gray-300">
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       </div>

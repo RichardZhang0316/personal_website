@@ -70,6 +70,13 @@ export default function Home() {
                 className="px-4 py-2 px-4 py-2 bg-blue-600 text-white border border-blue-600 rounded-md hover:bg-blue-700 transition font-medium"
               >
                 LinkedIn</a>
+              <a
+                href={personal.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-black text-white border border-black rounded-md hover:bg-gray-800 transition font-medium"
+              >
+                Medium</a>
             </div>
           </div>
           <div className="md:w-1/3 flex justify-center">
