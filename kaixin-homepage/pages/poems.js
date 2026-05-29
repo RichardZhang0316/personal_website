@@ -6,8 +6,22 @@ import { poems, poemTags, personal } from "../data/experience";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
+function formatPoemDate(dateStr) {
+  const [y, m, d] = dateStr.split('-');
+  return `${y}.${parseInt(m)}.${parseInt(d)}`;
+}
+
+function LocationPin() {
+  return (
+    <svg className="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+    </svg>
+  );
+}
+
 function PoemCard({ poem }) {
   const [expanded, setExpanded] = useState(false);
+  const contentTags = poem.tags.filter(t => t !== poem.location);
 
   return (
     <div
@@ -15,21 +29,31 @@ function PoemCard({ poem }) {
       style={{ borderColor: expanded ? 'var(--accent)' : undefined }}
       onClick={() => setExpanded(!expanded)}
     >
-      {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            {poem.tags.map((tag) => (
+          {/* Location badge + content tags */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-3">
+            {poem.location && (
+              <span className="flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full"
+                style={{ background: 'rgba(59,130,246,0.12)', color: 'var(--accent-lt)' }}>
+                <LocationPin />
+                {poem.location}
+              </span>
+            )}
+            {contentTags.map((tag) => (
               <span key={tag} className="tag-neutral">{tag}</span>
             ))}
           </div>
+
           <h2 className="text-xl font-semibold leading-snug" style={{ color: 'var(--text)' }}>
             {poem.title}
           </h2>
-          <p className="text-xs mt-1.5" style={{ color: 'var(--muted)' }}>{poem.date}</p>
+          <p className="text-xs mt-1.5" style={{ color: 'var(--muted)' }}>
+            {formatPoemDate(poem.date)}
+          </p>
         </div>
 
-        {/* Expand icon */}
+        {/* Expand chevron */}
         <div
           className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-200"
           style={{
@@ -44,18 +68,18 @@ function PoemCard({ poem }) {
         </div>
       </div>
 
-      {/* Excerpt (collapsed) */}
+      {/* Excerpt */}
       {!expanded && (
         <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
           {poem.excerpt}
         </p>
       )}
 
-      {/* Full body (expanded) */}
+      {/* Full body */}
       {expanded && (
         <div className="mt-5 pt-5" style={{ borderTop: '1px solid var(--border)' }}>
           <pre
-            className="text-sm leading-8 whitespace-pre-wrap font-sans"
+            className="text-sm leading-8 whitespace-pre-wrap"
             style={{ color: 'var(--text)', fontFamily: 'inherit' }}
           >
             {poem.body}
@@ -77,7 +101,7 @@ export default function Poems() {
     <div className={`${geistSans.className} page-bg`}>
       <Head>
         <title>Poems – Kaixin Zhang</title>
-        <meta name="description" content="Original poems by Kaixin Zhang." />
+        <meta name="description" content="Poems and excerpts collected by Kaixin Zhang along the way." />
       </Head>
       <Navbar />
 
@@ -87,12 +111,12 @@ export default function Poems() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>Poems</h1>
             <p className="mt-3 text-lg" style={{ color: 'var(--muted)' }}>
-              Words written in the margins of life — between debugging sessions, across time zones, and under different skies.
+              Words written and collected along the way — between cities, across seasons.
             </p>
           </div>
         </div>
 
-        {/* Tag filter */}
+        {/* Location filter */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-6">
           <div className="flex flex-wrap gap-2">
             <button
@@ -102,7 +126,7 @@ export default function Poems() {
                 ? { background: 'var(--accent)', color: '#fff' }
                 : { background: 'var(--bg-card)', color: 'var(--muted)', border: '1px solid var(--border)' }}
             >
-              All
+              全部
             </button>
             {poemTags.map((tag) => (
               <button
@@ -124,7 +148,7 @@ export default function Poems() {
         {/* Poem list */}
         <section className="py-10 px-4 sm:px-6 lg:px-16 max-w-4xl mx-auto">
           {filtered.length === 0 ? (
-            <p className="text-center py-16" style={{ color: 'var(--muted)' }}>No poems found for this tag.</p>
+            <p className="text-center py-16" style={{ color: 'var(--muted)' }}>此地暂无诗。</p>
           ) : (
             <div className="space-y-4">
               {filtered.map((poem) => (
