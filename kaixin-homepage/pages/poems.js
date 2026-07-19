@@ -93,9 +93,10 @@ function PoemCard({ poem }) {
 export default function Poems() {
   const [activeTag, setActiveTag] = useState("all");
 
+  const sorted = [...poems].sort((a, b) => new Date(b.date) - new Date(a.date));
   const filtered = activeTag === "all"
-    ? poems
-    : poems.filter((p) => p.tags.includes(activeTag));
+    ? sorted
+    : sorted.filter((p) => p.tags.includes(activeTag));
 
   return (
     <div className={`${geistSans.className} page-bg`}>
