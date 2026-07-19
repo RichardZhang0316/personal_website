@@ -82,7 +82,7 @@ export default function Contact() {
                 className="card-hover flex items-center gap-4 p-4"
               >
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(59,130,246,0.1)', color: 'var(--accent-lt)' }}>
+                  style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
                   {item.icon}
                 </div>
                 <div>

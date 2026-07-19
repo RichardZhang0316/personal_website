@@ -103,7 +103,7 @@ function PaintingCard({ painting, onClick }) {
             《{painting.title}》
           </h2>
           <span className="flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full flex-shrink-0"
-            style={{ background: 'rgba(59,130,246,0.12)', color: 'var(--accent-lt)' }}>
+            style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
             <LocationPin />
             {painting.location}
           </span>

@@ -39,10 +39,10 @@ export default function Navbar() {
                   href={href}
                   className="px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-150"
                   style={active
-                    ? { color: 'var(--accent-lt)', background: 'rgba(59,130,246,0.1)' }
+                    ? { color: 'var(--text)', background: 'var(--active-bg)', fontWeight: 600 }
                     : { color: 'var(--muted)' }
                   }
-                  onMouseEnter={e => { if (!active) { e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; } }}
+                  onMouseEnter={e => { if (!active) { e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.background = 'rgba(0,0,0,0.04)'; } }}
                   onMouseLeave={e => { if (!active) { e.currentTarget.style.color = 'var(--muted)'; e.currentTarget.style.background = 'transparent'; } }}
                 >
                   {label}

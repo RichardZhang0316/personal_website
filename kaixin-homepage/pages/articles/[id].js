@@ -62,7 +62,7 @@ export default function ArticlePage({ article }) {
         <header className="mb-10">
           {article.location && (
             <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full mb-4"
-              style={{ background: 'rgba(59,130,246,0.12)', color: 'var(--accent-lt)' }}>
+              style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
               <LocationPin />
               {article.location}
             </span>

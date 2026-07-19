@@ -1,15 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --bg:        #0f172a;
-  --bg-card:   #1e293b;
-  --bg-hover:  #263248;
-  --border:    #334155;
-  --border-subtle: rgba(255,255,255,0.06);
-  --text:      #e2e8f0;
-  --muted:     #94a3b8;
-  --accent:    #3b82f6;
-  --accent-lt: #60a5fa;
+  --bg:          #f9f8f6;
+  --bg-card:     #ffffff;
+  --bg-hover:    #f2f1ef;
+  --border:      #e5e3df;
+  --border-subtle: rgba(0,0,0,0.06);
+  --text:        #1a1918;
+  --muted:       #6b6966;
+  --accent:      #1a1918;
+  --accent-lt:   #444240;
+  --badge-bg:    rgba(0,0,0,0.06);
+  --badge-text:  var(--muted);
+  --active-bg:   rgba(0,0,0,0.07);
 }
 
 @theme inline {
@@ -31,18 +34,18 @@ body {
 
 /* ── Layout helpers ── */
 .page-bg   { background: var(--bg); min-height: 100vh; }
-.card      { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
+.card      { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; }
 .card-hover {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+  border-radius: 10px;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 .card-hover:hover {
   background: var(--bg-hover);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(59,130,246,0.12);
+  border-color: #c5c3bf;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.07);
 }
 
 /* ── Typography ── */
@@ -55,31 +58,31 @@ body {
   font-weight: 700;
   color: var(--text);
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 2px solid var(--text);
   display: inline-block;
   margin-bottom: 2rem;
 }
 
 /* ── Navbar ── */
 .navbar {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(249,248,246,0.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
 }
 
 /* ── Buttons ── */
 .btn-primary {
-  background: var(--accent);
-  color: #fff;
+  background: var(--text);
+  color: var(--bg);
   border-radius: 8px;
   font-weight: 600;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 .btn-primary:hover {
-  background: #2563eb;
+  background: var(--accent-lt);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(59,130,246,0.35);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .btn-ghost {
@@ -88,19 +91,19 @@ body {
   border: 1px solid var(--border);
   border-radius: 8px;
   font-weight: 500;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 .btn-ghost:hover {
-  border-color: var(--accent-lt);
-  color: var(--accent-lt);
-  background: rgba(59,130,246,0.08);
+  border-color: var(--text);
+  color: var(--text);
+  background: var(--bg-hover);
 }
 
 /* ── Skill tags ── */
 .tag {
-  background: rgba(59,130,246,0.1);
-  color: var(--accent-lt);
-  border: 1px solid rgba(59,130,246,0.25);
+  background: rgba(0,0,0,0.06);
+  color: var(--muted);
+  border: 1px solid rgba(0,0,0,0.1);
   border-radius: 6px;
   font-size: 0.8rem;
   font-weight: 500;
@@ -108,12 +111,12 @@ body {
   transition: background 0.15s, border-color 0.15s;
 }
 .tag:hover {
-  background: rgba(59,130,246,0.2);
-  border-color: rgba(59,130,246,0.5);
+  background: rgba(0,0,0,0.1);
+  border-color: rgba(0,0,0,0.2);
 }
 
 .tag-neutral {
-  background: rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.05);
   color: var(--muted);
   border: 1px solid var(--border-subtle);
   border-radius: 6px;
@@ -124,8 +127,8 @@ body {
 
 /* ── Hero avatar border ── */
 .avatar-ring {
-  padding: 3px;
-  background: linear-gradient(135deg, var(--accent), #6366f1);
+  padding: 2px;
+  background: var(--border);
   border-radius: 18px;
   display: inline-block;
 }
@@ -135,9 +138,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(16,185,129,0.1);
-  color: #34d399;
-  border: 1px solid rgba(16,185,129,0.25);
+  background: rgba(0,0,0,0.06);
+  color: var(--muted);
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 4px 12px;
   font-size: 0.8rem;
@@ -145,17 +148,13 @@ body {
 }
 .status-dot {
   width: 6px; height: 6px;
-  background: #34d399;
+  background: var(--muted);
   border-radius: 50%;
-  animation: pulse-dot 2s ease infinite;
-}
-@keyframes pulse-dot {
-  0%,100% { opacity:1; } 50% { opacity:0.4; }
 }
 
 /* ── Page header band ── */
 .page-header {
-  background: var(--bg-card);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: 3rem 1rem;
   text-align: center;
@@ -170,20 +169,20 @@ body {
 
 /* ── Fade-in animation ── */
 @keyframes fadeUp {
-  from { opacity:0; transform:translateY(20px); }
+  from { opacity:0; transform:translateY(16px); }
   to   { opacity:1; transform:translateY(0); }
 }
-.fade-up   { animation: fadeUp 0.5s ease both; }
-.fade-up-1 { animation: fadeUp 0.5s 0.08s ease both; opacity:0; }
-.fade-up-2 { animation: fadeUp 0.5s 0.16s ease both; opacity:0; }
-.fade-up-3 { animation: fadeUp 0.5s 0.26s ease both; opacity:0; }
-.fade-up-4 { animation: fadeUp 0.5s 0.36s ease both; opacity:0; }
+.fade-up   { animation: fadeUp 0.45s ease both; }
+.fade-up-1 { animation: fadeUp 0.45s 0.08s ease both; opacity:0; }
+.fade-up-2 { animation: fadeUp 0.45s 0.16s ease both; opacity:0; }
+.fade-up-3 { animation: fadeUp 0.45s 0.26s ease both; opacity:0; }
+.fade-up-4 { animation: fadeUp 0.45s 0.36s ease both; opacity:0; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
 /* ── Footer ── */
 .footer {
@@ -206,7 +205,7 @@ body {
   top: 6px;
   width: 14px; height: 14px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--text);
   border: 2px solid var(--bg);
-  box-shadow: 0 0 0 2px var(--accent);
+  box-shadow: 0 0 0 2px var(--border);
 }

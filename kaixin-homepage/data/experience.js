@@ -6,7 +6,7 @@ export const personal = {
   github: "https://github.com/RichardZhang0316",
   medium: "https://medium.com/@richardzhangkaixin0316",
   summary: "Software engineer with strong programming, analytical, and communication skills. Experienced in system programming, full-stack, distributed system, agile development, fintech, machine learning, and mobile development with Java, C/C++, and Python",
-  objective: "Incoming Software Engineer @ TikTok · Ads Measurement Signal Privacy Infrastructure"
+  objective: "Software Engineer · Systems & Infrastructure"
 };
 
 export const education = [
@@ -1457,6 +1457,14 @@ export const paintings = [
     date: "2026-07-05",
     location: "Santa Clara",
     image: "/images/art/window-santa-clara.jpeg",
+    description: ""
+  },
+  {
+    id: 2,
+    title: "加州",
+    date: "2026-07-17",
+    location: "Santa Clara",
+    image: "/images/art/jizhou-california.jpeg",
     description: ""
   }
 ];

@@ -35,7 +35,7 @@ function PoemCard({ poem }) {
           <div className="flex flex-wrap items-center gap-1.5 mb-3">
             {poem.location && (
               <span className="flex items-center gap-1 text-xs font-medium px-2.5 py-0.5 rounded-full"
-                style={{ background: 'rgba(59,130,246,0.12)', color: 'var(--accent-lt)' }}>
+                style={{ background: 'var(--badge-bg)', color: 'var(--badge-text)' }}>
                 <LocationPin />
                 {poem.location}
               </span>

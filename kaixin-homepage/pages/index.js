@@ -21,10 +21,6 @@ export default function Home() {
           {/* Text */}
           <div className="md:w-3/5 space-y-5">
             <div className="fade-up">
-              <div className="status-pill mb-4">
-                <span className="status-dot" />
-                Joining TikTok · Ads Measurement · Signal Privacy Infra
-              </div>
               <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight" style={{ color: 'var(--text)' }}>
                 {personal.name}
               </h1>

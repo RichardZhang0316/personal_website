@@ -36,7 +36,7 @@ export default function About() {
     <div className={`${geistSans.className} page-bg`}>
       <Head>
         <title>About – Kaixin Zhang</title>
-        <meta name="description" content="Learn more about Kaixin Zhang — software engineer, UPenn MS CIS student, and incoming TikTok engineer." />
+        <meta name="description" content="Learn more about Kaixin Zhang — software engineer and UPenn MS CIS graduate." />
       </Head>
       <Navbar />
 
@@ -58,11 +58,8 @@ export default function About() {
                 Hi, I&apos;m Kaixin
               </h1>
               <p className="mt-5 text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>
-                I&apos;m a software engineer finishing my M.S. in Computer and Information Science at the{' '}
+                I&apos;m a software engineer with an M.S. in Computer and Information Science from the{' '}
                 <span style={{ color: 'var(--text)', fontWeight: 600 }}>University of Pennsylvania</span>.
-                This summer I&apos;ll be joining{' '}
-                <span style={{ color: 'var(--text)', fontWeight: 600 }}>TikTok</span>{' '}
-                as a software engineer on the Ads Measurement Signal Privacy Infrastructure team.
               </p>
               <p className="mt-4 text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>
                 I build systems that care about correctness — distributed key-value stores, real-time
@@ -94,8 +91,7 @@ export default function About() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { label: 'Based in', value: 'Philadelphia, PA' },
-              { label: 'Studying', value: 'M.S. CIS @ UPenn' },
-              { label: 'Joining', value: 'TikTok — Ads Measurement Signal Privacy Infra' },
+              { label: 'Education', value: 'M.S. CIS @ UPenn' },
             ].map((item) => (
               <div key={item.label} className="card p-5">
                 <p className="text-xs font-medium uppercase tracking-wider mb-2" style={{ color: 'var(--muted)' }}>
