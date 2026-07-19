@@ -10,6 +10,7 @@ const links = [
   { href: '/poems', label: 'Poems' },
   { href: '/articles', label: '文章' },
   { href: '/art', label: '画' },
+  { href: '/reflections', label: '反思录' },
   { href: '/contact', label: 'Contact' },
 ];
 
