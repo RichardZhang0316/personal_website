@@ -8,6 +8,7 @@ const links = [
   { href: '/projects', label: 'Projects' },
   { href: '/blog', label: 'Blog' },
   { href: '/poems', label: 'Poems' },
+  { href: '/articles', label: '文章' },
   { href: '/art', label: '画' },
   { href: '/contact', label: 'Contact' },
 ];
