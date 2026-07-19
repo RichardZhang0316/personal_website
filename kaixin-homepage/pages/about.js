@@ -4,39 +4,22 @@ import Head from "next/head";
 import Link from "next/link";
 import Navbar from "../components/navigation_bar";
 import { personal, education, skills } from "../data/experience";
+import { t } from "../data/translations";
+import { useLang } from "../contexts/LanguageContext";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const interests = [
-  {
-    icon: "🖥",
-    title: "Distributed Systems",
-    description: "Fascinated by the challenges of consistency, fault tolerance, and scalability — from Chord DHTs to primary-backup replication.",
-  },
-  {
-    icon: "🔐",
-    title: "Privacy & Security Infrastructure",
-    description: "Increasingly interested in signal privacy, data minimization, and building trustworthy measurement pipelines at scale.",
-  },
-  {
-    icon: "⚙️",
-    title: "Systems Programming",
-    description: "Love working close to the metal — pthreads, TCP sockets, memory layout, and squeezing performance out of C/C++.",
-  },
-  {
-    icon: "📊",
-    title: "Machine Learning",
-    description: "Curious about the intersection of ML and systems: efficient training infrastructure, LLMs, and responsible AI.",
-  },
-];
-
 export default function About() {
+  const { lang } = useLang();
+  const T = t.about;
+  const interests = T.interests_list;
+
   return (
     <div className={`${geistSans.className} page-bg`}>
       <Head>
         <title>About – Kaixin Zhang</title>
-        <meta name="description" content="Learn more about Kaixin Zhang — software engineer and UPenn MS CIS graduate." />
+        <meta name="description" content={T.metaDesc[lang]} />
       </Head>
       <Navbar />
 
@@ -55,20 +38,29 @@ export default function About() {
 
             <div className="md:w-2/3">
               <h1 className="text-4xl sm:text-5xl font-bold" style={{ color: 'var(--text)' }}>
-                Hi, I&apos;m Kaixin
+                {T.greeting[lang]}
               </h1>
               <p className="mt-5 text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>
-                I&apos;m a software engineer with an M.S. in Computer and Information Science from the{' '}
-                <span style={{ color: 'var(--text)', fontWeight: 600 }}>University of Pennsylvania</span>.
+                {lang === 'en' ? (
+                  <>
+                    {T.bio1.en}{' '}
+                    <span style={{ color: 'var(--text)', fontWeight: 600 }}>{T.bio1university.en}</span>
+                    {T.bio1end.en}
+                  </>
+                ) : (
+                  <>
+                    {T.bio1.zh}
+                    <span style={{ color: 'var(--text)', fontWeight: 600 }}>{T.bio1university.zh}</span>
+                    {T.bio1end.zh}
+                  </>
+                )}
               </p>
               <p className="mt-4 text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>
-                I build systems that care about correctness — distributed key-value stores, real-time
-                arbitrage engines, full-stack analytics platforms. I&apos;m drawn to problems where the
-                gap between "it works on my machine" and "it works at scale" is where the real engineering lives.
+                {T.bio2[lang]}
               </p>
               <div className="flex flex-wrap gap-3 mt-8">
                 <a href={`mailto:${personal.email}`} className="btn-primary px-5 py-2.5 text-sm">
-                  Get in touch
+                  {T.getInTouch[lang]}
                 </a>
                 <a href={personal.linkedin} target="_blank" rel="noopener noreferrer"
                   className="btn-ghost px-5 py-2.5 text-sm">
@@ -87,11 +79,11 @@ export default function About() {
 
         {/* Currently */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-14">
-          <h2 className="section-heading">Currently</h2>
+          <h2 className="section-heading">{T.currently[lang]}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
-              { label: 'Based in', value: 'Philadelphia, PA' },
-              { label: 'Education', value: 'M.S. CIS @ UPenn' },
+              { label: T.basedIn[lang],      value: T.basedInVal[lang] },
+              { label: T.educationLabel[lang], value: T.educationVal[lang] },
             ].map((item) => (
               <div key={item.label} className="card p-5">
                 <p className="text-xs font-medium uppercase tracking-wider mb-2" style={{ color: 'var(--muted)' }}>
@@ -107,14 +99,20 @@ export default function About() {
 
         {/* Interests */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-14">
-          <h2 className="section-heading">What I&apos;m Interested In</h2>
+          <h2 className="section-heading">{T.interests[lang]}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {interests.map((item) => (
-              <div key={item.title} className="card-hover p-5 flex gap-4">
-                <span className="text-2xl flex-shrink-0 mt-0.5">{item.icon}</span>
+            {interests.map((item, i) => (
+              <div key={i} className="card-hover p-5 flex gap-4">
+                <span className="text-2xl flex-shrink-0 mt-0.5">
+                  {['🖥', '🔐', '⚙️', '📊'][i]}
+                </span>
                 <div>
-                  <h3 className="font-semibold text-base mb-1" style={{ color: 'var(--text)' }}>{item.title}</h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{item.description}</p>
+                  <h3 className="font-semibold text-base mb-1" style={{ color: 'var(--text)' }}>
+                    {item.title[lang]}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                    {item.description[lang]}
+                  </p>
                 </div>
               </div>
             ))}
@@ -125,7 +123,7 @@ export default function About() {
 
         {/* Education */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-14">
-          <h2 className="section-heading">Education</h2>
+          <h2 className="section-heading">{T.educationSection[lang]}</h2>
           <div className="space-y-4">
             {education.map((edu) => (
               <div key={edu.id} className="card p-5 flex items-center gap-5">
@@ -157,14 +155,14 @@ export default function About() {
         {/* Skills */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-14">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="section-heading" style={{ marginBottom: 0 }}>Skills</h2>
-            <Link href="/experiences" className="btn-ghost px-4 py-2 text-sm">Full experience →</Link>
+            <h2 className="section-heading" style={{ marginBottom: 0 }}>{T.skills[lang]}</h2>
+            <Link href="/experiences" className="btn-ghost px-4 py-2 text-sm">{T.fullExp[lang]}</Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             {[
-              { label: 'Languages', items: skills.languages },
-              { label: 'Frameworks', items: skills.frameworks },
-              { label: 'Tools', items: skills.tools },
+              { label: T.languages[lang], items: skills.languages },
+              { label: T.frameworks[lang], items: skills.frameworks },
+              { label: T.tools[lang], items: skills.tools },
             ].map(({ label, items }) => (
               <div key={label} className="card p-5">
                 <h3 className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--muted)' }}>
@@ -183,19 +181,19 @@ export default function About() {
         {/* Contact CTA */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-14">
           <div className="card p-10 text-center">
-            <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--text)' }}>Let&apos;s connect</h2>
+            <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--text)' }}>{T.letsConnect[lang]}</h2>
             <p className="mb-6 max-w-md mx-auto" style={{ color: 'var(--muted)' }}>
-              Always happy to chat about distributed systems, career paths, or just swap ideas.
+              {T.connectSub[lang]}
             </p>
             <Link href="/contact" className="btn-primary px-6 py-3 text-sm inline-block">
-              Get in touch
+              {T.getInTouch[lang]}
             </Link>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} {personal.name}. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {personal.name}. {t.footer.rights[lang]}</p>
         <p className="mt-1" style={{ color: '#475569' }}>Built with Next.js · Tailwind CSS</p>
       </footer>
     </div>

@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { personal } from "../data/experience";
+import { t } from "../data/translations";
+import { useLang } from "../contexts/LanguageContext";
 import Navbar from "../components/navigation_bar";
 import Head from 'next/head';
 
@@ -52,7 +54,10 @@ const contactItems = (personal) => [
 ];
 
 export default function Contact() {
+  const { lang } = useLang();
+  const T = t.contact;
   const items = contactItems(personal);
+
   return (
     <div className={`${geistSans.className} page-bg`}>
       <Head>
@@ -63,13 +68,13 @@ export default function Contact() {
       <main>
         <div className="page-header">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>Contact</h1>
+            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>{T.pageTitle[lang]}</h1>
           </div>
         </div>
 
         <section className="max-w-2xl mx-auto px-4 sm:px-6 py-16">
           <p className="text-lg mb-10 text-center" style={{ color: 'var(--muted)' }}>
-            Feel free to reach out — I&apos;m always open to new opportunities and conversations.
+            {T.intro[lang]}
           </p>
 
           <div className="space-y-3">
@@ -101,14 +106,14 @@ export default function Contact() {
 
           <div className="card p-6 mt-10 text-center">
             <p className="text-sm" style={{ color: 'var(--muted)' }}>
-              Based in <span style={{ color: 'var(--text)' }}>Philadelphia, PA</span> · Open to remote and hybrid roles
+              {T.location[lang]}
             </p>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} {personal.name}. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {personal.name}. {t.footer.rights[lang]}</p>
       </footer>
     </div>
   );

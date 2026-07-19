@@ -2,13 +2,17 @@ import Image from "next/image";
 import Navbar from "../components/navigation_bar";
 import { Geist, Geist_Mono } from "next/font/google";
 import { personal, education, skills, projects } from "../data/experience";
+import { t } from "../data/translations";
+import { useLang } from "../contexts/LanguageContext";
 import Link from "next/link";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export default function Home() {
+  const { lang } = useLang();
   const featuredProjects = projects.filter(p => p.featured).slice(0, 2);
+  const T = t.home;
 
   return (
     <div className={`${geistSans.className} page-bg`}>
@@ -27,12 +31,12 @@ export default function Home() {
             </div>
 
             <p className="fade-up-1 text-lg leading-relaxed" style={{ color: 'var(--muted)' }}>
-              {personal.summary}
+              {lang === 'zh' ? T.summary.zh : personal.summary}
             </p>
 
             <div className="fade-up-2 flex flex-wrap gap-3 pt-2">
               <a href={`mailto:${personal.email}`} className="btn-primary px-5 py-2.5 text-sm">
-                Email Me
+                {T.emailMe[lang]}
               </a>
               <a href={personal.github} target="_blank" rel="noopener noreferrer"
                 className="btn-ghost px-5 py-2.5 text-sm">
@@ -70,7 +74,7 @@ export default function Home() {
 
       {/* ── Education ── */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-16">
-        <h2 className="section-heading">Education</h2>
+        <h2 className="section-heading">{T.education[lang]}</h2>
         <div className="space-y-4">
           {education.map((edu) => (
             <div key={edu.id} className="card p-5 flex items-center gap-5">
@@ -102,12 +106,12 @@ export default function Home() {
 
       {/* ── Skills ── */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-16">
-        <h2 className="section-heading">Skills</h2>
+        <h2 className="section-heading">{T.skills[lang]}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { label: 'Languages', items: skills.languages },
-            { label: 'Frameworks', items: skills.frameworks },
-            { label: 'Tools & Cloud', items: skills.tools },
+            { label: T.languages[lang], items: skills.languages },
+            { label: T.frameworks[lang], items: skills.frameworks },
+            { label: T.toolsCloud[lang], items: skills.tools },
           ].map(({ label, items }) => (
             <div key={label} className="card p-5">
               <h3 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: 'var(--muted)' }}>
@@ -128,8 +132,8 @@ export default function Home() {
       {/* ── Featured Projects ── */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16 py-16">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="section-heading" style={{ marginBottom: 0 }}>Featured Projects</h2>
-          <Link href="/projects" className="btn-ghost px-4 py-2 text-sm">View All →</Link>
+          <h2 className="section-heading" style={{ marginBottom: 0 }}>{T.featuredProjects[lang]}</h2>
+          <Link href="/projects" className="btn-ghost px-4 py-2 text-sm">{T.viewAll[lang]}</Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
@@ -141,7 +145,7 @@ export default function Home() {
                     width={600} height={300} className="object-cover w-full h-full" />
                 ) : (
                   <div className="flex items-center justify-center h-full">
-                    <span style={{ color: 'var(--muted)' }}>No image</span>
+                    <span style={{ color: 'var(--muted)' }}>{T.noImage[lang]}</span>
                   </div>
                 )}
               </div>
@@ -161,7 +165,7 @@ export default function Home() {
                   )}
                 </div>
                 <Link href={`/projects#project-${project.id}`} className="text-sm font-medium" style={{ color: 'var(--accent-lt)' }}>
-                  View details →
+                  {T.viewDetails[lang]}
                 </Link>
               </div>
             </div>
@@ -170,7 +174,7 @@ export default function Home() {
       </section>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} {personal.name}. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {personal.name}. {t.footer.rights[lang]}</p>
         <p className="mt-1" style={{ color: '#475569' }}>Built with Next.js · Tailwind CSS</p>
       </footer>
     </div>

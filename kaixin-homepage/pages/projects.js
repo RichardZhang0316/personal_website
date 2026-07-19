@@ -2,6 +2,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { projects, categories, personal } from "../data/experience";
+import { t } from "../data/translations";
+import { useLang } from "../contexts/LanguageContext";
 import Navbar from "../components/navigation_bar";
 import Head from 'next/head';
 
@@ -9,6 +11,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export default function Projects() {
+  const { lang } = useLang();
+  const T = t.projects;
   const [activeCategory, setActiveCategory] = useState("all");
   const [expandedProject, setExpandedProject] = useState(null);
 
@@ -29,7 +33,7 @@ export default function Projects() {
       <main>
         <div className="page-header">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>Projects</h1>
+            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>{T.pageTitle[lang]}</h1>
           </div>
         </div>
 
@@ -43,7 +47,7 @@ export default function Projects() {
                 ? { background: 'var(--accent)', color: '#fff' }
                 : { background: 'var(--bg-card)', color: 'var(--muted)', border: '1px solid var(--border)' }}
             >
-              All Projects
+              {T.allProjects[lang]}
             </button>
             {categories.map((cat) => (
               <button
@@ -65,7 +69,7 @@ export default function Projects() {
         {/* Project list */}
         <section className="py-10 px-4 sm:px-6 lg:px-16 max-w-6xl mx-auto">
           {filteredProjects.length === 0 ? (
-            <p className="text-center py-16" style={{ color: 'var(--muted)' }}>No projects found.</p>
+            <p className="text-center py-16" style={{ color: 'var(--muted)' }}>{T.noProjects[lang]}</p>
           ) : (
             <div className="space-y-6">
               {filteredProjects.map((project) => (
@@ -78,7 +82,7 @@ export default function Projects() {
                           width={400} height={300} className="object-cover w-full h-full" />
                       ) : (
                         <div className="flex items-center justify-center h-full">
-                          <span style={{ color: 'var(--muted)' }}>No image</span>
+                          <span style={{ color: 'var(--muted)' }}>{T.noImage[lang]}</span>
                         </div>
                       )}
                     </div>
@@ -120,7 +124,7 @@ export default function Projects() {
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                             </svg>
-                            Live Demo
+                            {T.liveDemo[lang]}
                           </a>
                         )}
                       </div>
@@ -130,7 +134,7 @@ export default function Projects() {
                         className="flex items-center gap-1 text-sm font-medium transition-colors"
                         style={{ color: 'var(--accent-lt)' }}
                       >
-                        {expandedProject === project.id ? 'Hide details' : 'Show details'}
+                        {expandedProject === project.id ? T.hideDetails[lang] : T.showDetails[lang]}
                         <svg className={`w-4 h-4 transition-transform ${expandedProject === project.id ? 'rotate-180' : ''}`}
                           fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -143,7 +147,7 @@ export default function Projects() {
                   {expandedProject === project.id && (
                     <div className="px-6 py-5" style={{ borderTop: '1px solid var(--border)', background: 'rgba(0,0,0,0.2)' }}>
                       <h3 className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--muted)' }}>
-                        Project Details
+                        {T.projectDetails[lang]}
                       </h3>
                       <ul className="space-y-2">
                         {project.details.map((detail, idx) => (
@@ -163,7 +167,7 @@ export default function Projects() {
       </main>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} {personal.name}. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {personal.name}. {t.footer.rights[lang]}</p>
       </footer>
     </div>
   );

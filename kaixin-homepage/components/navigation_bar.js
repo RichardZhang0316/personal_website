@@ -1,26 +1,30 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/experiences', label: 'Experience' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/poems', label: 'Poems' },
-  { href: '/articles', label: '文章' },
-  { href: '/art', label: '画' },
-  { href: '/reflections', label: '反思录' },
-  { href: '/contact', label: 'Contact' },
-];
+import { useLang } from '../contexts/LanguageContext';
+import { t } from '../data/translations';
 
 export default function Navbar() {
   const router = useRouter();
+  const { lang, setLang } = useLang();
+
+  const links = [
+    { href: '/',            label: t.nav.home[lang] },
+    { href: '/about',       label: t.nav.about[lang] },
+    { href: '/experiences', label: t.nav.experiences[lang] },
+    { href: '/projects',    label: t.nav.projects[lang] },
+    { href: '/blog',        label: t.nav.blog[lang] },
+    { href: '/poems',       label: t.nav.poems[lang] },
+    { href: '/articles',    label: t.nav.articles[lang] },
+    { href: '/art',         label: t.nav.art[lang] },
+    { href: '/reflections', label: t.nav.reflections[lang] },
+    { href: '/contact',     label: t.nav.contact[lang] },
+  ];
+
   return (
     <nav className="navbar sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
-          <Link href="/" className="flex items-center gap-2.5 group">
+          <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
             <div className="w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold text-white"
               style={{ background: 'var(--accent)' }}>
               KZ
@@ -49,6 +53,29 @@ export default function Navbar() {
                 </Link>
               );
             })}
+
+            {/* Language toggle */}
+            <div className="flex items-center ml-3 rounded-md overflow-hidden text-xs font-semibold"
+              style={{ border: '1px solid var(--border)' }}>
+              <button
+                onClick={() => setLang('en')}
+                className="px-2.5 py-1.5 transition-colors"
+                style={lang === 'en'
+                  ? { background: 'var(--text)', color: 'var(--bg)' }
+                  : { background: 'transparent', color: 'var(--muted)' }}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLang('zh')}
+                className="px-2.5 py-1.5 transition-colors"
+                style={lang === 'zh'
+                  ? { background: 'var(--text)', color: 'var(--bg)' }
+                  : { background: 'transparent', color: 'var(--muted)' }}
+              >
+                中
+              </button>
+            </div>
           </div>
         </div>
       </div>

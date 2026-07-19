@@ -2,12 +2,17 @@ import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "../components/navigation_bar";
 import { experiences, personal } from "../data/experience";
+import { t } from "../data/translations";
+import { useLang } from "../contexts/LanguageContext";
 import Head from 'next/head';
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export default function ExperiencePage() {
+  const { lang } = useLang();
+  const T = t.experiences;
+
   return (
     <div className={`${geistSans.className} page-bg`}>
       <Head>
@@ -19,7 +24,7 @@ export default function ExperiencePage() {
       <main>
         <div className="page-header">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>Professional Experience</h1>
+            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>{T.pageTitle[lang]}</h1>
           </div>
         </div>
 
@@ -59,7 +64,7 @@ export default function ExperiencePage() {
                   {/* Responsibilities */}
                   <div className="mb-5">
                     <h4 className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--muted)' }}>
-                      Responsibilities & Achievements
+                      {T.responsibilities[lang]}
                     </h4>
                     <ul className="space-y-2.5">
                       {exp.highlights.map((highlight, idx) => (
@@ -74,7 +79,7 @@ export default function ExperiencePage() {
                   {/* Tech stack */}
                   <div>
                     <h4 className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--muted)' }}>
-                      Technologies
+                      {T.technologies[lang]}
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {exp.technologies.map((tech, idx) => (
@@ -90,7 +95,7 @@ export default function ExperiencePage() {
       </main>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} {personal.name}. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {personal.name}. {t.footer.rights[lang]}</p>
       </footer>
     </div>
   );

@@ -3,17 +3,21 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
 import Navbar from "../components/navigation_bar";
 import { blogPosts, blogTags, personal } from "../data/experience";
+import { t } from "../data/translations";
+import { useLang } from "../contexts/LanguageContext";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
+function formatDate(dateStr, lang) {
+  return new Date(dateStr).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
     year: "numeric", month: "long", day: "numeric",
   });
 }
 
 export default function Blog() {
+  const { lang } = useLang();
+  const T = t.blog;
   const [activeTag, setActiveTag] = useState("all");
 
   const filtered = activeTag === "all"
@@ -32,9 +36,9 @@ export default function Blog() {
         {/* Header */}
         <div className="page-header">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>Blog</h1>
+            <h1 className="text-4xl font-bold" style={{ color: 'var(--text)' }}>{T.pageTitle[lang]}</h1>
             <p className="mt-3 text-lg" style={{ color: 'var(--muted)' }}>
-              Technical writing on distributed systems, systems programming, and software engineering.
+              {T.subtitle[lang]}
             </p>
             <a
               href={personal.medium}
@@ -45,7 +49,7 @@ export default function Blog() {
               onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-lt)'}
               onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
             >
-              View all posts on Medium
+              {T.viewAllMedium[lang]}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
@@ -63,7 +67,7 @@ export default function Blog() {
                 ? { background: 'var(--accent)', color: '#fff' }
                 : { background: 'var(--bg-card)', color: 'var(--muted)', border: '1px solid var(--border)' }}
             >
-              All
+              {T.all[lang]}
             </button>
             {blogTags.map((tag) => (
               <button
@@ -85,7 +89,7 @@ export default function Blog() {
         {/* Post list */}
         <section className="py-10 px-4 sm:px-6 lg:px-16 max-w-6xl mx-auto">
           {filtered.length === 0 ? (
-            <p className="text-center py-16" style={{ color: 'var(--muted)' }}>No posts found for this tag.</p>
+            <p className="text-center py-16" style={{ color: 'var(--muted)' }}>{T.noPostsFound[lang]}</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {filtered.map((post) => (
@@ -120,11 +124,11 @@ export default function Blog() {
                   {/* Footer */}
                   <div className="mt-5 flex items-center justify-between">
                     <span className="text-xs" style={{ color: 'var(--muted)' }}>
-                      {formatDate(post.date)} · {post.readTime}
+                      {formatDate(post.date, lang)} · {post.readTime}
                     </span>
                     <span className="flex items-center gap-1 text-xs font-medium transition-colors"
                       style={{ color: 'var(--accent-lt)' }}>
-                      Read on Medium
+                      {T.readOnMedium[lang]}
                       <svg className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
@@ -143,7 +147,7 @@ export default function Blog() {
               rel="noopener noreferrer"
               className="btn-ghost inline-flex items-center gap-2 px-6 py-3 text-sm"
             >
-              See all posts on Medium
+              {T.seeAllMedium[lang]}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
@@ -153,7 +157,7 @@ export default function Blog() {
       </main>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} {personal.name}. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} {personal.name}. {t.footer.rights[lang]}</p>
         <p className="mt-1" style={{ color: '#475569' }}>Built with Next.js · Tailwind CSS</p>
       </footer>
     </div>
