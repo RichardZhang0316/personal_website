@@ -375,3 +375,16 @@ export const poems = [
 export const poemTags = [
   "查尔斯顿", "华盛顿 DC", "费城", "纽约", "北京", "博鳌", "万宁", "琼海", "海口"
 ];
+
+export const paintings = [
+  {
+    id: 1,
+    title: "窗",
+    date: "2026-07-05",
+    location: "Santa Clara",
+    image: "/images/art/window-santa-clara.jpeg",
+    description: ""
+  }
+];
+
+export const paintingLocations = ["Santa Clara"];
